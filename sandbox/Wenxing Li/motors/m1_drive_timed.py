@@ -110,9 +110,8 @@ def main():
     while time_s != 0:
         left_sp = int(input("Enter a speed for the motor (0 to 900 dps): "))
         right_sp = left_sp
-        time_s = int(input("Enter a time to drive (seconds): "))
+        time_s = int(input("Enter a distance to drive (inches): "))
         left_motor.run_forever(speed_sp=left_sp)
-        print('asdasda')
         right_motor.run_forever(speed_sp=right_sp)
         time.sleep(time_s/(0.0113*left_sp))
         left_motor.stop()

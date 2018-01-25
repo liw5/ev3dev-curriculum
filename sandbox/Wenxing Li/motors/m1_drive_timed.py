@@ -8,8 +8,26 @@ to collect data, then make an equation to figure out the time needed given the d
 
 Note: If future modules you will learn different (BETTER) ways to drive a given distance.
 
-Authors: David Fisher and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+Authors: David Fisher and Wenxing Li.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+
+import ev3dev.ev3 as ev3
+import time
+
+def simple_drive(left_sp, right_sp, time_s):
+    left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
+    right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
+
+    left_motor.run_forever(speed_sp=left_sp)
+    right_motor.run_forever(speed_sp=right_sp)
+
+    time.sleep(time_s)
+
+    left_motor.stop()
+    right_motor.stop()
+
+simple_drive(100,100,5)
+
 
 # TODO: 2. Get a yardstick or tape measure to do some testing with /examples/motors/drive_input_speed.py
 #   Have your whole team work this activity together.

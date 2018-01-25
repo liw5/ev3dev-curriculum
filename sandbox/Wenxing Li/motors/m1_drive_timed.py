@@ -106,10 +106,9 @@ def main():
     assert left_motor.connected
     assert right_motor.connected
 
-    time_s = 1  # Any value other than 0.
+    time_s = 1
     while time_s != 0:
-        left_sp = int(
-            input("Enter a speed for the left motor (0 to 900 dps): "))
+        left_sp = int(input("Enter a speed for the motor (0 to 900 dps): "))
         right_sp = left_sp
         time_s = int(input("Enter a time to drive (seconds): "))
         left_motor.run_forever(speed_sp=left_sp)

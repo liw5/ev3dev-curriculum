@@ -112,6 +112,7 @@ def main():
         right_sp = left_sp
         time_s = int(input("Enter a time to drive (seconds): "))
         left_motor.run_forever(speed_sp=left_sp)
+        print('asdasda')
         right_motor.run_forever(speed_sp=right_sp)
         time.sleep(time_s/(0.0113*left_sp))
         left_motor.stop()

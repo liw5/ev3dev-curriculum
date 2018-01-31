@@ -39,8 +39,6 @@ class Snatch3r(object):
 
         position = distance * 90
 
-        print(position, speed)
-
         left_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
                                       stop_action='brake')
         right_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
@@ -50,9 +48,6 @@ class Snatch3r(object):
         left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
-
-        print("Goodbye!")
-        ev3.Sound.speak("Goodbye").wait()
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
         print("--------------------------------------------")
@@ -65,9 +60,6 @@ class Snatch3r(object):
 
         assert left_motor.connected
         assert right_motor.connected
-
-
-
 
         left_motor.run_to_rel_pos(position_sp=degrees_to_turn*410/90,
                                               speed_sp=turn_speed_sp,
@@ -82,10 +74,4 @@ class Snatch3r(object):
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
-        print("Goodbye!")
-        ev3.Sound.speak("Goodbye").wait()
 
-
-robot = Snatch3r()
-robot.drive_inches(20, 500)
-robot.turn_degrees(-180,200)

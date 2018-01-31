@@ -31,9 +31,11 @@ Authors: David Fisher and Jixi Wang.
 #        -- speed_sp
 #        -- stop_action
 
-# TODO: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
+# DONE: 5. Make sure the beep happens AFTER the motors stop.  Use the
+# wait_while command to block code execution.
 
-# TODO: 6. Formally test your work. When you think you have the problem complete run these tests:
+# done: 6. Formally test your work. When you think you have the problem
+# complete run these tests:
 #   200 dps 24 inches (make sure it drives within 2 inches of the target distance)
 #   400 dps 24 inches (make sure it drives within 2 inches of the target distance)
 #   800 dps 24 inches (make sure it drives within 2 inches of the target distance)
@@ -42,7 +44,8 @@ Authors: David Fisher and Jixi Wang.
 #   400 dps -36 inches (make sure it drives within 3 inches of the target distance)
 # Add more tests as you see fit.  Ideally you should be +/- 10% of the target goal this time.
 
-# TODO: 7. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
+# done: 7. Call over a TA or instructor to sign your team's checkoff sheet and
+# do a code review.
 #
 # Observations you should make, run_to_rel_pos is easier to use since it uses encoders that are independent of speed.
 
@@ -56,32 +59,29 @@ def main():
     print("--------------------------------------------")
     ev3.Sound.speak("Drive using encoders").wait()
 
-    # Connect two large motors on output ports B and C
     left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
     right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
 
-    # Check that the motors are actually connected
     assert left_motor.connected
     assert right_motor.connected
 
     time_s = 1  # Any value other than 0.
     while time_s != 0:
 
-        position_sp = int(input("distance to travel (inches): "))*90
-        speed_sp = int(input("Enter a speed (0 to 900 dps):"))
-        stop_action = 'brake'
-        left_motor.run_to_rel_pos(
-            position_sp, speed_sp, stop_action)
-        right_motor.run_to_rel_pos(
-            position_sp, speed_sp, stop_action)
+        position = int(input("distance to travel (inches): "))*90
+        speed = int(input("Enter a speed (0 to 900 dps):"))
+
+        print(position,speed)
+
+        left_motor.run_to_rel_pos(position_sp = position,speed_sp = speed,
+                                  stop_action = 'brake')
+        right_motor.run_to_rel_pos(position_sp = position,speed_sp = speed,
+                                   stop_action = 'brake')
         ev3.Sound.beep().wait()
         ev3.Sound.beep().wait()
         left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
-
-
-
 
 
 

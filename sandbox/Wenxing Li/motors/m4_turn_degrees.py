@@ -34,6 +34,7 @@ Authors: David Fisher and PUT_YOUR_NAME_HERE.
 #   Ask the user what speed they would like to use for the turn (0 to 900 degrees per second).
 #   Beep after the turn is complete via a beep in this module (tests to make sure the library is blocking)
 #   When the library method is complete have all team members VCS update and test using their own m4_turn_degrees.py
+robot =
 
 # TODO: 5. Formally test your work. When you think you have the problem complete run these tests:
 #     45 degrees turns left 45 degrees

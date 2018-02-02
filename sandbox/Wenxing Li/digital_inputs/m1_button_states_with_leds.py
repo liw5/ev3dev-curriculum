@@ -73,12 +73,14 @@ def main():
             ev3.Leds.set_color(ev3.Leds.RIGHT,ev3.Leds.RED)
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
 
+    btn = ev3.Button()
     btn.on_up = lambda state : up_botton(state)
     btn.on_left = lambda state : left_button(state)
     btn.on_down = lambda state : right_button(state)
 
-
     while True:
+        btn.process()
+        time.sleep(0.01)
         # TODO: 3. Implement the left, right, and up buttons as follows:
         #    When the up button is being pressed:
         #      -- print the word "up"

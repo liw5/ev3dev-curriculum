@@ -26,62 +26,58 @@ def main():
 
     # Opening LED dance (to show the LED syntax)
     # Red LEDs
-    ev3.Sound.speak("Red")
-    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
-    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
-    time.sleep(3)
+    #ev3.Sound.speak("Red")
+    #ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
+    #ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+    #time.sleep(3)
 
     # Green LEDs
-    ev3.Sound.speak("Green")
-    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
-    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
-    time.sleep(3)
+    #ev3.Sound.speak("Green")
+    #ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+    #ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
+    #time.sleep(3)
 
     # Turn LEDs off
-    ev3.Sound.speak("Off")
-    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
-    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+    #ev3.Sound.speak("Off")
+    #ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+    #ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
     # ev3.Leds.all_off()  # Could also use this single command if turning both LEDs off.
-    print('Press the Back button on the EV3 to exit this program.')
+    #print('Press the Back button on the EV3 to exit this program.')
 
     # Buttons on EV3 (the real focus of this module)
-    btn = ev3.Button()  # Construct the one and only EV3 Button object
-    led_colors = [ev3.Leds.BLACK,  # This list is useful for the down button in TO DO 4.
-                  ev3.Leds.GREEN,
-                  ev3.Leds.RED,
+    #btn = ev3.Button()  # Construct the one and only EV3 Button object
+    #led_colors = [ev3.Leds.BLACK,  # This list is useful for the down
+    # button in TO DO 4.
+                  #ev3.Leds.GREEN,
+                  #ev3.Leds.RED,
                   # ev3.Leds.ORANGE,  # Too close to another color in my opinion
                   # ev3.Leds.YELLOW,  # Too close to another color in my opinion
-                  ev3.Leds.AMBER]
+     #             ev3.Leds.AMBER]
 
-    current_color_index = 0
+    #current_color_index = 0
 
-    def up_botton(state):
-        if state:
+    btn = ev3.Button
+
+    for _ in range(10):
+        if btn.up:
             print('up')
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
             ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
 
-    def left_button(state):
-        if state:
+        if btn.left:
             print('left')
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
             ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
 
-    def right_button(state):
-        if state:
+        if btn.right:
             print('right')
             ev3.Leds.set_color(ev3.Leds.RIGHT,ev3.Leds.RED)
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
 
-    btn = ev3.Button()
-    btn.on_up = lambda state : up_botton(state)
-    btn.on_left = lambda state : left_button(state)
-    btn.on_down = lambda state : right_button(state)
+        time.sleep(1.0)
 
-    while True:
-        btn.process()
-        time.sleep(0.01)
-        # TODO: 3. Implement the left, right, and up buttons as follows:
+
+        # DONE: 3. Implement the left, right, and up buttons as follows:
         #    When the up button is being pressed:
         #      -- print the word "up"
         #      -- turn off all LEDs

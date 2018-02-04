@@ -23,7 +23,7 @@ def main():
         speed_deg_per_second = int(input("Speed (0 to 900 dps): "))
         if speed_deg_per_second == 0:
             break
-            
+
 
         sides = int(input("Number of sides: "))
         # Tip for later, try a negative value for Number of sides: to drive CW around the polygon instead of CCW.

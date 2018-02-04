@@ -114,13 +114,9 @@ def main():
                 print('4')
                 ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
                 ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
-            while True:
-                time.sleep(0.01)
-                if btn.down == False:
-                    num+= 1
-                    break
-
-
+        while btn.down is False:
+            num += 1
+            time.sleep(0.01)
 
 
 
@@ -131,6 +127,7 @@ def main():
         #   Since you are only allowed to use states, not event callbacks, this last request is a pain, but it's doable
         #     with a while loop that blocks code execution until the down instance variable is False.
         #     Use a time.sleep(0.01) inside the while loop to do nothing but wait for the button to be released.
+        
 
         # TODO: 5. Formally test your work. When you think you have the problem complete run these tests:
         #   Press Left - Green left LED is on (try holding the button down for a few seconds when you to the press)

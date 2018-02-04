@@ -73,6 +73,8 @@ def main():
             print('right')
             ev3.Leds.set_color(ev3.Leds.RIGHT,ev3.Leds.RED)
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+        else:
+            print('no button is pressed')
 
         time.sleep(1.0)
 

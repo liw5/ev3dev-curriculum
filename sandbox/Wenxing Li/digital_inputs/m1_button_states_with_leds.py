@@ -55,10 +55,9 @@ def main():
      #             ev3.Leds.AMBER]
 
     #current_color_index = 0
-
     btn = ev3.Button()
 
-    for _ in range(200):
+    for _ in range(20):
         if btn.up:
             print('up')
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
@@ -73,7 +72,7 @@ def main():
             print('right')
             ev3.Leds.set_color(ev3.Leds.RIGHT,ev3.Leds.RED)
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
-        time.sleep(1.0)
+
 
 
         # DONE: 3. Implement the left, right, and up buttons as follows:
@@ -96,7 +95,7 @@ def main():
 
 
     num = 0
-    for _ in range(300):
+    for _ in range(20):
         if btn.down:
             if (num+1)%4 == 1:
                 print('1')

@@ -56,9 +56,9 @@ def main():
 
     #current_color_index = 0
 
-    btn = ev3.Button
-
-    for _ in range(10):
+    btn = ev3.Button()
+    """
+    for _ in range(200):
         if btn.up:
             print('up')
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
@@ -73,11 +73,8 @@ def main():
             print('right')
             ev3.Leds.set_color(ev3.Leds.RIGHT,ev3.Leds.RED)
             ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
-        else:
-            print('no button is pressed')
-
         time.sleep(1.0)
-
+    """
 
         # DONE: 3. Implement the left, right, and up buttons as follows:
         #    When the up button is being pressed:
@@ -97,6 +94,29 @@ def main():
         #     there just to provide you with code examples for using the LEDs.  It does not need to run anymore.
         #     Just make sure not to comment out too much. ;)
 
+
+    num = 0
+    for _ in range(300):
+        if btn.down:
+            if (num+1)%4 == 1:
+                print('1')
+                ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+                ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
+            elif (num+1)%4 == 2:
+                print('2')
+                ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
+                ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+            elif (num+1)%4 == 3:
+                print('3')
+                ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.AMBER)
+                ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.AMBER)
+            elif (num+1)%4 == 0:
+                print('4')
+                ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+                ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+        while btn.down == False:
+            num += 1
+            time.sleep(0.01)
 
 
 

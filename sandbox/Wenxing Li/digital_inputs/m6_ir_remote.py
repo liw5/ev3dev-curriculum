@@ -102,7 +102,7 @@ def main():
 # Some event handlers have been written for you (ones for the arm).
 # Movement event handlers have not been provided.
 # ----------------------------------------------------------------------
-# TODO: 6. Implement the IR handler callbacks handlers.
+# DONE: 6. Implement the IR handler callbacks handlers.
 def robot_drive_forward(button_state,robot):
     assert robot.left_motor.connected
     assert robot.right_motor.connected

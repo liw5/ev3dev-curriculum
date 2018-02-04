@@ -114,9 +114,13 @@ def main():
                 print('4')
                 ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
                 ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
-        while btn.down == False:
-            num += 1
-            time.sleep(0.01)
+            while True:
+                time.sleep(0.01)
+                if btn.down == False:
+                    num+= 1
+                    break
+
+
 
 
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+、、-#!/usr/bin/env python3
 """
 In this module you'll practice using the IR Remote using event callbacks.  You'll find the process works the same
 as buttons.  There are 6 buttons (up, down, left, right, enter, and back) and 16 IR remote buttons (4 buttons *

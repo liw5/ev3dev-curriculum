@@ -75,7 +75,7 @@ def arm_calibration(arm_motor, touch_sensor):
     print('python')
 
     arm_motor.run_forever(speed_sp=200)
-    while touch_sensor:
+    while not touch_sensor.is_pressed:
         time.sleep(0.01)
     arm_motor.stop(stop_action="brake")
     ev3.Sound.beep()
@@ -123,9 +123,10 @@ def arm_down(arm_motor):
     # Make a beep sound
 
     # Code that attempts to do this task but has bugs.  Fix them.
-    arm_motor.run_to_abs_pos()
+    print('down')
+    arm_motor.run_to_abs_pos(position_sp = 0, speed_sp = MAX_SPEED)
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)  # Blocks until the motor finishes running
-
+    ev3.Sound.beep()
     # TODO: 6. After you fix the bugs in the three arm movement commands demo your code to a TA or instructor.
     #
     # Observations you should make, the TouchSensor is easy to use, but the motor commands are still a little bit

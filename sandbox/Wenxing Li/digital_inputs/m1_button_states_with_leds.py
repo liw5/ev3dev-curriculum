@@ -55,7 +55,6 @@ def main():
      #             ev3.Leds.AMBER]
 
     #current_color_index = 0
-
     btn = ev3.Button()
 
     for _ in range(20):

@@ -52,6 +52,8 @@ class Snatch3r(object):
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
+
+
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
         print("--------------------------------------------")
         print("  Turn_Degrees")
@@ -110,5 +112,8 @@ class Snatch3r(object):
             position_sp=0, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep()
+
+    def shutdown(self):
+        ev3.Sound.speak("Goodbye").wait()
 
 

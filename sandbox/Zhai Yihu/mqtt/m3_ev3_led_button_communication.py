@@ -72,6 +72,9 @@ class MyDelegate(object):
     def __init__(self):
         self.running = True
 
+    def set_led(self):
+
+
 
 def main():
     print("--------------------------------------------")

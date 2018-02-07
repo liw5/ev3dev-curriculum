@@ -66,16 +66,20 @@ def main():
     forward_button = ttk.Button(main_frame, text="Forward")
     forward_button.grid(row=2, column=1)
     # forward_button and '<Up>' key is done for your here...
-    forward_button['command'] = lambda: forward(mqtt_client, left_speed_entry,
-                                          right_speed_entry)
-    root.bind('<Up>', lambda event: forward(mqtt_client, left_speed_entry,
-                                      right_speed_entry))
+    forward_button['command'] = lambda: forward(mqtt_client,
+                                                int(left_speed_entry.get()),
+                                          int(right_speed_entry.get()))
+    root.bind('<Up>', lambda event: forward(mqtt_client,
+                                            int(left_speed_entry.get()),
+                                      int(right_speed_entry.get())))
 
     left_button = ttk.Button(main_frame, text="Left")
     left_button.grid(row=3, column=0)
     # left_button and '<Left>' key
-    left_button['command'] = lambda: left(mqtt_client, left_speed_entry)
-    root.bind('<Left>', lambda event: left(mqtt_client, left_speed_entry))
+    left_button['command'] = lambda: left(mqtt_client,
+                                          int(left_speed_entry.get()))
+    root.bind('<Left>', lambda event: left(mqtt_client,
+                                           int(left_speed_entry.get())))
 
     stop_button = ttk.Button(main_frame, text="Stop")
     stop_button.grid(row=3, column=1)
@@ -86,16 +90,20 @@ def main():
     right_button = ttk.Button(main_frame, text="Right")
     right_button.grid(row=3, column=2)
     # right_button and '<Right>' key
-    right_button['command'] = lambda: right(mqtt_client, right_speed_entry)
-    root.bind('<Right>', lambda event: right(mqtt_client, right_speed_entry))
+    right_button['command'] = lambda: right(mqtt_client,
+                                            int(right_speed_entry.get()))
+    root.bind('<Right>', lambda event: right(mqtt_client,
+                                             int(right_speed_entry.get())))
 
     back_button = ttk.Button(main_frame, text="Back")
     back_button.grid(row=4, column=1)
     # back_button and '<Down>' key
-    back_button['command'] = lambda: back(mqtt_client, left_speed_entry,
-                                          right_speed_entry)
-    root.bind('<Back>', lambda event: back(mqtt_client, left_speed_entry,
-                                           right_speed_entry))
+    back_button['command'] = lambda: backward(mqtt_client,
+                                              int(left_speed_entry.get()),
+                                          int(right_speed_entry.get()))
+    root.bind('<Down>', lambda event: backward(mqtt_client,
+                                               int(left_speed_entry.get()),
+                                           int(right_speed_entry.get())))
 
     up_button = ttk.Button(main_frame, text="Up")
     up_button.grid(row=5, column=0)
@@ -129,24 +137,28 @@ def forward(mqtt_client, left_speed_entry,
     print('forward')
     mqtt_client.send_message("drive_forward",[left_speed_entry,right_speed_entry])
 
+
 def left(mqtt_client, left_speed_entry):
     print('left')
     mqtt_client.send_message("turn_left",[left_speed_entry])
+
 
 def right(mqtt_client, right_speed_entry):
     print('right')
     mqtt_client.send_message("turn_right",[right_speed_entry])
 
+
 def stop(mqtt_client):
     print('stop')
     mqtt_client.send_message("stop")
 
+
 def backward(mqtt_client, left_speed_entry, right_speed_entry):
     print('backward')
-    mqtt_client.send_message("backward",[left_speed_entry,right_speed_entry])
+    mqtt_client.send_message("drive_backward",[left_speed_entry,
+                                            right_speed_entry])
 
 # TODO: 5. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.  This is the final one!
-#
 # Observations you should make, you did basically this same program using the IR Remote, but your computer can be a
 # remote control that can do A LOT more than an IR Remote.  We are just doing the basics here.
 

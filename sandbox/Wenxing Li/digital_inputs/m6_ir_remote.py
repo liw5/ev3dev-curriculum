@@ -180,7 +180,6 @@ def handle_arm_down_button(button_state, robot):
 def handle_calibrate_button(button_state, robot):
     """
     Has the arm go up then down to fix the starting position.
-
     Type hints:
       :type button_state: bool
       :type robot: robo.Snatch3r

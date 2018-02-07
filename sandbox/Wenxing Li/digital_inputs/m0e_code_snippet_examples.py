@@ -25,6 +25,7 @@ def touch_sensor_as_state():
         else:
             print("Touch sensor is not pressed")
         time.sleep(1.0)
+        
 
 
 def buttons_as_states():

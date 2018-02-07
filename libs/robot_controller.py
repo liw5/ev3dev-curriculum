@@ -26,6 +26,8 @@ class Snatch3r(object):
         self.arm_motor = ev3.MediumMotor(ev3.OUTPUT_A)
         self.touch_sensor = ev3.TouchSensor()
         self.MAX_SPEED = 900
+        self.color_sensor = ev3.ColorSensor()
+        #   assert self.color_sensor
 
 
     def drive_inches(self, distance, speed):

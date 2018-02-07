@@ -143,7 +143,8 @@ def stop(mqtt_client):
 
 def backward(mqtt_client, left_speed_entry, right_speed_entry):
     print('backward')
-    mqtt_client.send_message("backward",[left_speed_entry,right_speed_entry])
+    mqtt_client.send_message("drive_backward",[left_speed_entry,
+                                            right_speed_entry])
 
 # TODO: 5. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.  This is the final one!
 #

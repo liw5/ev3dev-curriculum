@@ -20,7 +20,6 @@
 
     ...(some time later, perhaps when a button is clicked)...
     mqtt_client.send_message("arm_up")
-
   In this example the PC is connecting to the MQTT broker and only planning to publish
     messages, so the MqttClient constructor is called with no delegate parameter set.
     The EV3 however expects to be subscribing to messages so an object must be given to

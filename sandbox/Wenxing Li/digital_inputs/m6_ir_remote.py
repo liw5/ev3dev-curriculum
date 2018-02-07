@@ -78,7 +78,7 @@ def main():
 
     # For our standard shutdown button.
     btn = ev3.Button()
-    btn.on_backspace = lambda state: handle_shutdown(state, dc)
+    btn.on_backspace = lambda state: handle_shutdown(state, dc,robot)
 
     #robot.arm_calibration()  # Start with an arm calibration in this program.
 
@@ -189,7 +189,7 @@ def handle_calibrate_button(button_state, robot):
         robot.arm_calibration()
 
 
-def handle_shutdown(button_state, dc):
+def handle_shutdown(button_state, dc,robot):
     """
     Exit the program.
 
@@ -197,8 +197,14 @@ def handle_shutdown(button_state, dc):
       :type button_state: bool
       :type dc: DataContainer
     """
+    assert robot.left_motor.connected
+    assert robot.right_motor.connected
     if button_state:
         dc.running = False
+        robot.left_motor.stop(stop_action='brake')
+        robot.right_motor.stop(stop_action='brake')
+
+
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

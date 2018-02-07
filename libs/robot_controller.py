@@ -34,22 +34,21 @@ class Snatch3r(object):
         print("--------------------------------------------")
         ev3.Sound.speak("Drive using encoders").wait()
 
-        left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
-        right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
 
-        assert left_motor.connected
-        assert right_motor.connected
+
+        assert self.left_motor.connected
+        assert self.right_motor.connected
 
         position = distance * 90
 
-        left_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
+        self.left_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
                                       stop_action='brake')
-        right_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
+        self.right_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
                                        stop_action='brake')
         ev3.Sound.beep().wait()
         ev3.Sound.beep().wait()
-        left_motor.wait_while(ev3.Motor.STATE_RUNNING)
-        right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
 
@@ -60,23 +59,22 @@ class Snatch3r(object):
         print("--------------------------------------------")
         ev3.Sound.speak("drive").wait()
 
-        left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
-        right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
 
-        assert left_motor.connected
-        assert right_motor.connected
 
-        left_motor.run_to_rel_pos(position_sp=degrees_to_turn*410/90,
+        assert self.left_motor.connected
+        assert self.right_motor.connected
+
+        self.left_motor.run_to_rel_pos(position_sp=degrees_to_turn*470/90,
                                               speed_sp=turn_speed_sp,
                                               stop_action='brake')
-        right_motor.run_to_rel_pos(position_sp=-degrees_to_turn*410/90,
+        self.right_motor.run_to_rel_pos(position_sp=-degrees_to_turn*470/90,
                                                speed_sp=turn_speed_sp,
                                                stop_action='brake')
 
         ev3.Sound.beep().wait()
         ev3.Sound.beep().wait()
-        left_motor.wait_while(ev3.Motor.STATE_RUNNING)
-        right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
     def arm_calibration(self):

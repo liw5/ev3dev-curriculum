@@ -37,7 +37,7 @@ Authors: David Fisher and Jixi Wang.
 #   Ask the user what speed they would like to use for the turn (0 to 900 degrees per second).
 #   Beep after the turn is complete via a beep in this module (tests to make sure the library is blocking)
 #   When the library method is complete have all team members VCS update and test using their own m4_turn_degrees.py
-robot =
+
 
 # DONE: 5. Formally test your work. When you think you have the problem
 # complete run these tests:
@@ -53,3 +53,17 @@ robot =
 # TODO: 6. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
 #
 # Observations you should make, using run_to_rel_pos is useful for accurate turns, but testing takes time.
+
+
+import ev3dev.ev3 as ev3
+import robot_controller as robo
+
+def main():
+    robot = robo.Snatch3r()
+    robot.turn_degrees(90,300)
+    robot.turn_degrees(-150, 400)
+    robot.turn_degrees(360, 350)
+
+
+main()
+

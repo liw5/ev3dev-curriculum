@@ -72,6 +72,7 @@ class MyDelegate(object):
 
     def __init__(self):
         self.running = True
+        self.robot = robo.Snatch3r()
 
     def set_led(self,led_side_string,led_color_string):
         print("Received: {} {}".format(led_side_string, led_color_string))
@@ -102,12 +103,14 @@ def main():
     print("--------------------------------------------")
     ev3.Sound.speak("LED Button communication").wait()
 
-    # TODO: 3. Create an instance of your delegate class and an MQTT client, passing in the delegate object.
+    # DONE: 3. Create an instance of your delegate class and an MQTT client,
+    # passing in the delegate object.
     # Note: you can determine the variable names that you should use by looking at the errors underlined in later code.
     # Once you have that done connect the mqtt_client to the MQTT broker using the connect_to_pc method.
     # Note: on EV3 you call connect_to_pc, but in the PC code it will call connect_to_ev3
-    my_delegate = robo.Snatch3r()
+    my_delegate = MyDelegate()
     mqtt_client = com.MqttClient(my_delegate)
+    my_delegate.mqtt_client = mqtt_client
     mqtt_client.connect_to_pc()
 
 
@@ -136,14 +139,15 @@ def handle_button_press(button_state, mqtt_client, button_name):
     if button_state:
         print("{} button was pressed".format(button_name))
         mqtt_client.send_message("button_pressed",['Up'])
-        # TODO: 4. Send a message using MQTT that will:
+        # DONE: 4. Send a message using MQTT that will:
         #   -- Call the method called "button_pressed" on the delegate at the other end of the pipe.
         #   -- Pass the parameters [button_name] as a list.
         # This is meant to help you learn the mqtt_client.send_message syntax.
         # You can review the code above to understand how button_name is passed into this function.
 
 
-# TODO: 5. Run this program on your EV3 and run m3_pc_led_button_communication.py on your PC at the same time.
+# DONE: 5. Run this program on your EV3 and run
+# m3_pc_led_button_communication.py on your PC at the same time.
 # This will be the first time you've run a program on the robot today, but you'll remember how to do it (right?).
 # Hint: To be less confusing use two different computers for this task.  One to run the EV3 program (you) and one to run
 #   the PC program (a different person on your team).  It can be done from one computer but that gets confusing.

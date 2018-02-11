@@ -9,7 +9,7 @@ MQTT call to:
 
 When that message is received, it will update the rectangle that is displayed on the canvas to match the Pixy values.
 
-Authors: David Fisher and PUT_YOUR_NAME_HERE.
+Authors: David Fisher and Wenxing Li.
 """
 
 import tkinter
@@ -27,7 +27,6 @@ class MyDelegate(object):
 
     def on_rectangle_update(self, x, y, width, height):
         self.canvas.coords(self.rectangle_tag, [x, y, x + width, y + height])
-
 
 def main():
     root = tkinter.Tk()

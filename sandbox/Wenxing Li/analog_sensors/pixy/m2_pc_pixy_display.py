@@ -28,7 +28,6 @@ class MyDelegate(object):
     def on_rectangle_update(self, x, y, width, height):
         self.canvas.coords(self.rectangle_tag, [x, y, x + width, y + height])
 
-
 def main():
     root = tkinter.Tk()
     root.title = "Pixy display"

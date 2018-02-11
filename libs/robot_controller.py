@@ -30,8 +30,8 @@ class Snatch3r(object):
         assert self.color_sensor
         self.ir_sensor = ev3.InfraredSensor()
         assert self.ir_sensor
-        self.Beaconseeker = ev3.BeaconSeeker(channel=1)
-        assert self.Beaconseeker
+        self.beacon_seeker = ev3.BeaconSeeker(channel=1)
+        assert self.beacon_seeker
 
 
     def drive_inches(self, distance, speed):

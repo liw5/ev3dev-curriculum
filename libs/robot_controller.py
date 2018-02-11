@@ -12,14 +12,13 @@
 """
 
 import ev3dev.ev3 as ev3
+import math
 import time
-
 
 class Snatch3r(object):
     """Commands for the Snatch3r robot that might be useful in many different programs."""
-
-    # TODO: Implement the Snatch3r class as needed when working the sandbox
-    # exercises
+    
+    # TODO: Implement the Snatch3r class as needed when working the sandox exercises
     # (and delete these comments)
     def __init__(self):
         self.left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
@@ -31,25 +30,34 @@ class Snatch3r(object):
         assert self.color_sensor
         self.ir_sensor = ev3.InfraredSensor()
         assert self.ir_sensor
-        self.running = False
-        self.pixy = ev3.Sensor(driver_name="pixy-lego")
-        assert self.pixy
+        self.Beaconseeker = ev3.BeaconSeeker(channel=1)
+        assert self.Beaconseeker
+
 
     def drive_inches(self, distance, speed):
-        """Drives the robot in the given distance(inches)
-        and at the given speed(degrees/second)
-        It makes it go backward when the distance isnegative"""
+        print("--------------------------------------------")
+        print("  Move")
+        print("--------------------------------------------")
+        ev3.Sound.speak("Drive using encoders").wait()
+
+
+
         assert self.left_motor.connected
         assert self.right_motor.connected
 
         position = distance * 90
 
         self.left_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
-                                       stop_action='brake')
+                                      stop_action='brake')
         self.right_motor.run_to_rel_pos(position_sp=position, speed_sp=speed,
-                                        stop_action='brake')
+                                       stop_action='brake')
+        ev3.Sound.beep().wait()
+        ev3.Sound.beep().wait()
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        ev3.Sound.beep().wait()
+
+
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
         print("--------------------------------------------")
@@ -57,16 +65,17 @@ class Snatch3r(object):
         print("--------------------------------------------")
         ev3.Sound.speak("drive").wait()
 
+
+
         assert self.left_motor.connected
         assert self.right_motor.connected
 
-        self.left_motor.run_to_rel_pos(position_sp=degrees_to_turn * 470 / 90,
-                                       speed_sp=turn_speed_sp,
-                                       stop_action='brake')
-        self.right_motor.run_to_rel_pos(
-            position_sp=-degrees_to_turn * 470 / 90,
-            speed_sp=turn_speed_sp,
-            stop_action='brake')
+        self.left_motor.run_to_rel_pos(position_sp=degrees_to_turn*470/90,
+                                              speed_sp=turn_speed_sp,
+                                              stop_action='brake')
+        self.right_motor.run_to_rel_pos(position_sp=-degrees_to_turn*470/90,
+                                               speed_sp=turn_speed_sp,
+                                               stop_action='brake')
 
         ev3.Sound.beep().wait()
         ev3.Sound.beep().wait()
@@ -85,8 +94,7 @@ class Snatch3r(object):
         ev3.Sound.beep().wait()
         arm_revolutions_for_full_range = 14.2
         self.arm_motor.run_to_rel_pos(
-            position_sp=-arm_revolutions_for_full_range * 360,
-            speed_sp=self.MAX_SPEED)
+            position_sp=-arm_revolutions_for_full_range * 360, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
 
         ev3.Sound.beep().wait()
@@ -118,27 +126,68 @@ class Snatch3r(object):
         self.running = False
         self.left_motor.stop(stop_action='brake')
         self.right_motor.stop(stop_action='brake')
-        self.arm_motor.stop(stop_action='brake')
         ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
         ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
         ev3.Sound.speak("Goodbye").wait()
 
-    def drive_forward(self, left_speed, right_speed):
-        self.left_motor.run_forever(speed_sp=left_speed)
-        self.right_motor.run_forever(speed_sp=right_speed)
+    def drive_forward(self,left_speed,right_speed):
+        self.left_motor.run_forever(speed_sp = left_speed)
+        self.right_motor.run_forever(speed_sp = right_speed)
 
-    def turn_left(self, left_speed):
-        self.left_motor.run_forever(speed_sp=-left_speed)
-        self.right_motor.run_forever(speed_sp=left_speed)
+    def turn_left(self,left_speed):
+        self.left_motor.run_forever(speed_sp = -left_speed)
+        self.right_motor.run_forever(speed_sp = left_speed)
 
-    def turn_right(self, right_speed):
-        self.left_motor.run_forever(speed_sp=right_speed)
-        self.right_motor.run_forever(speed_sp=-right_speed)
+    def turn_right(self,right_speed):
+        self.left_motor.run_forever(speed_sp = right_speed)
+        self.right_motor.run_forever(speed_sp = -right_speed)
 
     def stop(self):
-        self.left_motor.stop(stop_action='brake')
+        self.left_motor.stop(stop_action = 'brake')
         self.right_motor.stop(stop_action='brake')
 
-    def drive_backward(self, left_speed, right_speed):
+    def drive_backward(self,left_speed,right_speed):
         self.left_motor.run_forever(speed_sp=-left_speed)
         self.right_motor.run_forever(speed_sp=-right_speed)
+
+    def seek_beacon(self):
+
+        forward_speed = 300
+        turn_speed = 100
+
+        while not self.touch_sensor.is_pressed:
+            current_heading = self.beacon_seeker.heading
+            current_distance = self.beacon_seeker.distance
+            if current_distance == -128:
+                # If the IR Remote is not found just sit idle for this program until it is moved.
+                print("IR Remote not found. Distance is -128")
+                self.stop()
+            else:
+                if math.fabs(current_heading) < 2:
+                    # Close enough of a heading to move forward
+                    print("On the right heading. Distance: ", current_distance)
+                    # You add more!
+                    if current_distance == 0:
+                        self.stop()
+                        return True
+
+                    elif current_distance > 0:
+                        self.drive_forward(forward_speed, forward_speed)
+
+                elif math.fabs(current_heading) < 10:
+                    print("Adjusting heading: ", current_heading)
+                    if current_heading < 0:
+                        self.turn_left(turn_speed)
+
+                    elif current_heading > 0:
+                        self.turn_right(turn_speed)
+
+                elif math.fabs(current_heading) > 10:
+                    print("Heading is too far off to fix: ", current_heading)
+
+            time.sleep(0.2)
+
+        # The touch_sensor was pressed to abort the attempt if this code runs.
+        print("Abandon ship!")
+        self.stop()
+        return False

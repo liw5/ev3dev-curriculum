@@ -31,7 +31,8 @@ def main():
 
         print("value1: X", robot.pixy.value(1))
         print("value2: Y", robot.pixy.value(2))
-        if robot.pixy.value(1) <= 150:
+        if robot.pixy.value(1) >= 0:
+            if robot.pixy.valuw(1) <=150:
             robot.turn_left(turn_speed)
         if robot.pixy.value(1) >= 170:
             robot.turn_right(turn_speed)

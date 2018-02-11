@@ -57,7 +57,7 @@ def seek_beacon(robot):
       :rtype: bool
     """
 
-    # DONE: 2. Create a BeaconSeeker object on channel 1.
+
     beacon_seeker = ev3.BeaconSeeker(channel=1)
 
     forward_speed = 300

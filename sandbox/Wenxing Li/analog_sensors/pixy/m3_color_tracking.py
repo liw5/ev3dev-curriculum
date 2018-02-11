@@ -32,12 +32,16 @@ def main():
         print("value1: X", robot.pixy.value(1))
         print("value2: Y", robot.pixy.value(2))
         if robot.pixy.value(1) <= 150:
-            robot.turn_left(turn_speed)
+            if robot.pixy.value(1) > 0:
+                robot.turn_left(turn_speed)
         if robot.pixy.value(1) >= 170:
             robot.turn_right(turn_speed)
         if robot.pixy.value(1) >= 150:
             if robot.pixy.value(1) <= 170:
                 robot.stop()
+
+        if robot.pixy.value(1) == 0:
+            robot.stop()
 
         # TODO: 2. Read the Pixy values for x and y
         # Print the values for x and y
@@ -53,6 +57,7 @@ def main():
         time.sleep(0.25)
 
     print("Goodbye!")
+    robot.stop()
     ev3.Sound.speak("Goodbye").wait()
 
 # TODO: 4. Call over a TA or instructor to sign your team's checkoff sheet.

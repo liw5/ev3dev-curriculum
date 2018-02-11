@@ -29,6 +29,16 @@ def main():
 
     while not robot.touch_sensor.is_pressed:
 
+        print("value1: X", robot.pixy.value(1))
+        print("value2: Y", robot.pixy.value(2))
+        if robot.pixy.value(1) <= 150:
+            robot.turn_left(turn_speed)
+        if robot.pixy.value(1) >= 170:
+            robot.turn_right(turn_speed)
+        if robot.pixy.value(1) >= 150:
+            if robot.pixy.value(1) <= 170:
+                robot.stop()
+
         # TODO: 2. Read the Pixy values for x and y
         # Print the values for x and y
 

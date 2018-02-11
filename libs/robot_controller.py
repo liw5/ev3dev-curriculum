@@ -32,6 +32,8 @@ class Snatch3r(object):
         assert self.ir_sensor
         self.beacon_seeker = ev3.BeaconSeeker(channel=1)
         assert self.beacon_seeker
+        self.pixy = ev3.Sensor(driver_name="pixy-lego")
+        assert self.pixy
 
 
     def drive_inches(self, distance, speed):

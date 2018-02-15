@@ -34,6 +34,7 @@ class Snatch3r(object):
         self.pixy = ev3.Sensor(driver_name="pixy-lego")
         assert self.pixy
         self.pixy.mode = "SIG1"
+        self.come_back == False
 
 
 
@@ -192,6 +193,22 @@ class Snatch3r(object):
             time.sleep(0.2)
 
         # The touch_sensor was pressed to abort the attempt if this code runs.
-        print("Abandon ship!")
+
         self.stop()
         return False
+
+    def follow_the_line(self):
+        while True:
+            if self.touch_sensor.is_pressed:
+                self.stop()
+                break
+            elif self.color_sensor.reflected_light_intensity <= 40:
+                self.turn_right(600)
+
+            elif self.color_sensor.reflected_light_intensity >= 50:
+                self.drive_forward(600, 600)
+            time.sleep(0.01)
+        self.stop()
+
+    def go_back(self):
+        self.come_back == True

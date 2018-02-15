@@ -38,7 +38,6 @@ class Snatch3r(object):
 
 
 
-
     def drive_inches(self, distance, speed):
         print("--------------------------------------------")
         print("  Move")

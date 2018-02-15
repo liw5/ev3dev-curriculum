@@ -12,9 +12,9 @@ def main():
     main_frame = ttk.Frame(root, padding=20, relief='raised')
     main_frame.grid()
 
-    up_button = ttk.Button(main_frame, text="go back")
-    up_button.grid(row=1, column=0)
-    up_button['command'] = lambda: go_back(mqtt_client)
+    go_back_button = ttk.Button(main_frame, text="go back")
+    go_back_button.grid(row=1, column=0)
+    go_back_button['command'] = lambda: go_back(mqtt_client)
 
     root.mainloop()
 

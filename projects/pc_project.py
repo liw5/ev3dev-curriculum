@@ -18,7 +18,7 @@ class MyDelegate(object):
 
 
 def main():
-    mqtt_client = com.MqttClient(robo.Snatch3r())
+    mqtt_client = com.MqttClient()
     mqtt_client.connect_to_ev3()
 
     root = tkinter.Tk()
@@ -28,7 +28,7 @@ def main():
     main_frame.grid()
 
     start_button = ttk.Button(main_frame, text="start")
-    start_button.grid(row2=1, column=0)
+    start_button.grid(row=1, column=0)
     start_button['command'] = lambda: start(mqtt_client)
 
 

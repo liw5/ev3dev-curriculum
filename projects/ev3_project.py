@@ -14,7 +14,9 @@ robot = robo.Snatch3r()
 mqtt_client = com.MqttClient(robot)
 mqtt_client.connect_to_pc()
 
-
+print("-----------")
+print("start")
+print("-----------")
 def start():
     robot.seek_beacon()
     robot.arm_up()
@@ -52,3 +54,5 @@ def go_back_to_ori_location():
 def shut_down():
     ev3.Sound.speak('end project')
     robot.shutdown()
+
+robot.loop_forever()

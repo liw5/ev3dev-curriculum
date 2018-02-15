@@ -15,8 +15,7 @@ mqtt_client = com.MqttClient(robot)
 mqtt_client.connect_to_pc()
 
 
-
-def main():
+def start():
     robot.seek_beacon()
     robot.arm_up()
     while True:

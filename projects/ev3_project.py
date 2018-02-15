@@ -13,6 +13,8 @@ robot = robo.Snatch3r()
 mqtt_client = com.MqttClient(robot)
 mqtt_client.connect_to_pc()
 
+
+
 def main():
     robot.seek_beacon()
     robot.arm_up()

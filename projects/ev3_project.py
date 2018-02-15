@@ -48,3 +48,7 @@ def start():
 
 def go_back_to_ori_location():
     robot.go_back()
+
+def shut_down():
+    ev3.Sound.speak('end project')
+    robot.shutdown()

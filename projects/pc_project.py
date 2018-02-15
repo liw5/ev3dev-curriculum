@@ -12,23 +12,15 @@ def main():
     main_frame = ttk.Frame(root, padding=20, relief='raised')
     main_frame.grid()
 
-    up_button = ttk.Button(main_frame, text="Up")
-    up_button.grid(row=5, column=0)
-    up_button['command'] = lambda: send_up(mqtt_client)
-    root.bind('<u>', lambda event: send_up(mqtt_client))
-
-
+    up_button = ttk.Button(main_frame, text="go back")
+    up_button.grid(row=1, column=0)
+    up_button['command'] = lambda: go_back(mqtt_client)
 
     root.mainloop()
 
 
-
-
-
-
-def send_up(mqtt_client):
-    print("arm_up")
-    mqtt_client.send_message("arm_up")
+def go_back(mqtt_client):
+    mqtt_client.send_message("go_back_to_ori_location")
 
 
 

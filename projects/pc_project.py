@@ -38,7 +38,7 @@ def main():
 
     quit_button = ttk.Button(main_frame, text="quit")
     quit_button.grid(row=3, column=0)
-    quit_button['command'] = lambda: shut_down(mqtt_client)
+    quit_button['command'] = lambda : shut_down(mqtt_client)
 
     root.mainloop()
 

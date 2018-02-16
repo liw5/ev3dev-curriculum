@@ -33,7 +33,6 @@ class Snatch3r(object):
         assert self.beacon_seeker
         self.pixy = ev3.Sensor(driver_name="pixy-lego")
         assert self.pixy
-        self.pixy.mode = "SIG1"
         self.come_back = False
 
 
@@ -198,16 +197,19 @@ class Snatch3r(object):
 
     def follow_the_line(self):
         while True:
-            if self.touch_sensor.is_pressed:
+            print('follow line')
+            if self.color_sensor.reflected_light_intensity >= 90 :
+                self.turn_right(100)
+
+            elif self.color_sensor.reflected_light_intensity <= 10:
+                self.drive_forward(300, 300)
+
+            elif self.color_sensor.color == ev3.ColorSensor.COLOR_RED:
                 self.stop()
                 break
-            elif self.color_sensor.reflected_light_intensity <= 40:
-                self.turn_right(600)
 
-            elif self.color_sensor.reflected_light_intensity >= 50:
-                self.drive_forward(600, 600)
             time.sleep(0.01)
-        self.stop()
+
 
     def go_back(self):
         self.come_back = True

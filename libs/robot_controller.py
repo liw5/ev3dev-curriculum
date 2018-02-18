@@ -155,7 +155,7 @@ class Snatch3r(object):
 
     def seek_beacon(self):
 
-        forward_speed = 300
+        forward_speed = 150
         turn_speed = 100
 
         while not self.touch_sensor.is_pressed:
@@ -166,15 +166,15 @@ class Snatch3r(object):
                 print("IR Remote not found. Distance is -128")
                 self.stop()
             else:
-                if math.fabs(current_heading) < 2:
+                if math.fabs(current_heading) < 8:
                     # Close enough of a heading to move forward
                     print("On the right heading. Distance: ", current_distance)
                     # You add more!
-                    if current_distance == 0:
+                    if current_distance <= 3:
                         self.stop()
                         return True
 
-                    elif current_distance > 0:
+                    elif current_distance > 3:
                         self.drive_forward(forward_speed, forward_speed)
 
                 elif math.fabs(current_heading) < 10:
@@ -199,16 +199,15 @@ class Snatch3r(object):
         while True:
             print('follow line')
             if self.color_sensor.reflected_light_intensity >= 90 :
-                self.turn_right(100)
+                self.turn_right(50)
 
             elif self.color_sensor.reflected_light_intensity <= 10:
                 self.drive_forward(300, 300)
 
             elif self.color_sensor.color == ev3.ColorSensor.COLOR_RED:
-                self.stop()
                 break
+        self.stop()
 
-            time.sleep(0.01)
 
 
     def go_back(self):

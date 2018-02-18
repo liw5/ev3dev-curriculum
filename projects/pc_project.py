@@ -10,11 +10,11 @@ class MyDelegate(object):
 
     def mission_complete(self):
         message_to_display = "Mission Complete"
-        self.display_label.configure(text=message_to_display)
+        self.display_label['text'] = message_to_display
 
     def no_customer_found(self):
         message_to_display = "No Customer Found"
-        self.display_label.configure(text=message_to_display)
+        self.display_label['text'] = message_to_display
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     mqtt_client.connect_to_ev3()
 
     root = tkinter.Tk()
-    root.title("MQTT Remote")
+    root.title("Delivery Robot")
 
     main_frame = ttk.Frame(root, padding=20, relief='raised')
     main_frame.grid()
@@ -52,7 +52,7 @@ def main():
 
 
 def go_back(mqtt_client):
-    mqtt_client.send_message("go_back_to_ori_location")
+    mqtt_client.send_message("go_back_to_origin")
 
 def start(mqtt_client):
     mqtt_client.send_message("start")

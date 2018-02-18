@@ -28,10 +28,9 @@ class MyDelegate(object):
         self.robot.shutdown()
 
     def start(self):
-        """
         self.robot.seek_beacon()
         self.robot.arm_up()
-        """
+
         while True:
             self.robot.follow_the_line()
             if self.robot.pixy.value(3)>10:
@@ -63,7 +62,7 @@ def main():
     my_delegate = MyDelegate()
     mqtt_client = com.MqttClient(my_delegate)
     my_delegate.mqtt_client = mqtt_client
-    mqtt_client.connect_to_pc()
+    my_delegate.mqtt_client.connect_to_pc()
     my_delegate.robot.loop_forever()
 
 main()

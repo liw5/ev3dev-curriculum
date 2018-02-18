@@ -40,6 +40,14 @@ def main():
     quit_button.grid(row=3, column=0)
     quit_button['command'] = lambda : shut_down(mqtt_client)
 
+    chat_window = ttk.Label(main_frame, justify=tkinter.LEFT, text="",
+                            width=60, wraplength="500p")
+    chat_window.grid(columnspan=2)
+
+    my_delegate = MyDelegate(chat_window)
+    mqtt_client = com.MqttClient(my_delegate)
+    mqtt_client.connect_to_ev3()
+
     root.mainloop()
 
 

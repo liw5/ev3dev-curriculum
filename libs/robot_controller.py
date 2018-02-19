@@ -33,18 +33,10 @@ class Snatch3r(object):
         assert self.beacon_seeker
         self.pixy = ev3.Sensor(driver_name="pixy-lego")
         assert self.pixy
-        self.come_back = False
 
 
 
     def drive_inches(self, distance, speed):
-        print("--------------------------------------------")
-        print("  Move")
-        print("--------------------------------------------")
-        ev3.Sound.speak("Drive using encoders").wait()
-
-
-
         assert self.left_motor.connected
         assert self.right_motor.connected
 
@@ -63,13 +55,6 @@ class Snatch3r(object):
 
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
-        print("--------------------------------------------")
-        print("  Turn_Degrees")
-        print("--------------------------------------------")
-        ev3.Sound.speak("drive").wait()
-
-
-
         assert self.left_motor.connected
         assert self.right_motor.connected
 
@@ -170,11 +155,11 @@ class Snatch3r(object):
                     # Close enough of a heading to move forward
                     print("On the right heading. Distance: ", current_distance)
                     # You add more!
-                    if current_distance <= 3:
+                    if current_distance <= 11:
                         self.stop()
                         return True
 
-                    elif current_distance > 3:
+                    elif current_distance > 11:
                         self.drive_forward(forward_speed, forward_speed)
 
                 elif math.fabs(current_heading) < 10:
@@ -199,7 +184,20 @@ class Snatch3r(object):
         while True:
             print('follow line')
             if self.color_sensor.reflected_light_intensity >= 90 :
-                self.turn_right(50)
+                self.turn_right(70)
+
+            elif self.color_sensor.reflected_light_intensity <= 10:
+                self.drive_forward(300, 300)
+
+            elif self.color_sensor.color == ev3.ColorSensor.COLOR_RED:
+                break
+        self.stop()
+
+    def follow_the_reversed_line(self):
+        while True:
+            print('follow reversed line')
+            if self.color_sensor.reflected_light_intensity >= 90 :
+                self.turn_left(70)
 
             elif self.color_sensor.reflected_light_intensity <= 10:
                 self.drive_forward(300, 300)
@@ -209,6 +207,3 @@ class Snatch3r(object):
         self.stop()
 
 
-
-    def go_back(self):
-        self.come_back = True

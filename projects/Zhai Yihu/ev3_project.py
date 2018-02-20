@@ -13,8 +13,6 @@ def main():
     robot = robo.Snatch3r()
     robot.arm_up()
     robot.turn_degrees(180, 900)
-    print("--------------------------------------------")
-    print(" Drive to the color")
     robot.stop_at_color(3)
 
     robot.turn_degrees(90, 900)

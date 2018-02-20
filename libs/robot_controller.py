@@ -215,10 +215,12 @@ class Snatch3r(object):
         self.come_back = True
 
     def stop_at_color(self, color_to_seek):
-            while True:
-                self.drive_forward(900, 900)
-                if self.color_sensor.color == color_to_seek:
-                    self.stop()
-                    ev3.Sound.speak('Found', COLOR_NAMES[color_to_seek]).wait()
-                    break
-                time.sleep(0.1)
+        while True:
+            self.drive_forward(900, 900)
+            if self.color_sensor.color == color_to_seek:
+                self.stop()
+                ev3.Sound.speak('Found', COLOR_NAMES[color_to_seek]).wait()
+                break
+            time.sleep(0.1)
+
+

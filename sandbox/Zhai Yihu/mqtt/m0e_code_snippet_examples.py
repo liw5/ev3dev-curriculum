@@ -14,6 +14,11 @@ import time
 
 import robot_controller as robo
 import mqtt_remote_method_calls as com
+class DataContainer(object):
+    """ Helper class that might be useful to communicate between different callbacks."""
+
+    def __init__(self):
+        self.running = True
 
 
 def sending_messages_to_ev3():

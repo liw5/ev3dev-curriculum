@@ -63,12 +63,6 @@ class Snatch3r(object):
 
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
-        print("--------------------------------------------")
-        print("  Turn_Degrees")
-        print("--------------------------------------------")
-        ev3.Sound.speak("drive").wait()
-
-
 
         assert self.left_motor.connected
         assert self.right_motor.connected
@@ -80,11 +74,8 @@ class Snatch3r(object):
                                                speed_sp=turn_speed_sp,
                                                stop_action='brake')
 
-        ev3.Sound.beep().wait()
-        ev3.Sound.beep().wait()
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
-        ev3.Sound.beep().wait()
 
     def arm_calibration(self):
         assert self.arm_motor
@@ -213,3 +204,37 @@ class Snatch3r(object):
 
     def go_back(self):
         self.come_back = True
+
+
+    def stop_at_color(self, color_to_seek):
+
+        while True:
+            self.drive_forward(900, 900)
+            if self.color_sensor.color == color_to_seek:
+                self.stop()
+                ev3.Sound.speak('Found', COLOR_NAMES[color_to_seek]).wait()
+                break
+            time.sleep(0.1)
+
+
+    def deliver_to(self, number):
+        self.arm_up()
+        self.turn_degrees(180, 900)
+        self.stop_at_color(number)
+        self.turn_degrees(90, 900)
+        self.drive_inches(5, 900)
+        self.arm_down()
+        self.drive_inches(-5, 900)
+        self.turn_degrees(90, 900)
+        self.stop_at_color(6)
+
+    def get_item_from(self, number):
+        self.turn_degrees(180, 900)
+        self.stop_at_color(number)
+        self.turn_degrees(90, 900)
+        self.drive_inches(5, 900)
+        self.arm_up()
+        self.drive_inches(-5, 900)
+        self.turn_degrees(90, 900)
+        self.stop_at_color(6)
+        self.arm_down()
